@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Invitație nuntă</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #faf9f7;
+  color: #2b2b2b;
+}
+
+/* ===================== */
+/* ENVELOPE FULLSCREEN   */
+/* ===================== */
+
+#envelope-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(#f3efe9, #faf9f7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.envelope-wrapper {
+  width: 90vw;
+  max-width: 360px;
+  height: 240px;
+  position: relative;
+  perspective: 1000px;
+}
+
+.envelope {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  background: #e7dfd2;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  background: #ded4c4;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  border-radius: 10px;
+}
+
+.envelope-flap {
+  position: absolute;
+  inset: 0;
+  background: #d2c7b5;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  transform-origin: top;
+  transition: transform 1.2s ease;
+  border-radius: 10px;
+}
+
+.letter {
+  position: absolute;
+  left: 5%;
+  bottom: 10px;
+  width: 90%;
+  height: 200px;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transform: translateY(0);
+  transition: transform 1.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+}
+
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  transform: translateY(-120%);
+}
+
+#envelope-screen p {
+  margin-top: 30px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ===================== */
+/* INVITATION            */
+/* ===================== */
+
+#invitation {
+  display: none;
+}
+
+.hero img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+}
+
+section {
+  max-width: 420px;
+  margin: auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+}
+
+h1 {
+  font-size: 34px;
+}
+
+h2 {
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+.divider {
+  width: 70px;
+  height: 2px;
+  background: #c8b98d;
+  margin: 25px auto;
+}
+
+.countdown {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.countdown div {
+  flex: 1;
+}
+
+.gallery img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 14px 26px;
+  background: #c8b98d;
+  border: none;
+  font-size: 14px;
+}
+
+footer {
+  padding: 40px 20px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENVELOPE -->
+<div id="envelope-screen">
+  <div class="envelope-wrapper">
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="letter">Invitație</div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-front"></div>
+    </div>
+  </div>
+  <p>Apasă pentru a deschide invitația</p>
+</div>
+
+<!-- INVITATION -->
+<div id="invitation">
+
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e">
+  </div>
+
+  <section>
+    <p>Dragi oaspeți,</p>
+    <h1>[Numele Mirelui] &<br>[Numele Miresei]</h1>
+    <div class="divider"></div>
+    <p>
+      Vă invităm cu drag să fiți alături de noi  
+      pe <strong>20 septembrie 2026</strong>
+    </p>
+  </section>
+
+  <section>
+    <h2>Până la nuntă</h2>
+    <div class="countdown" id="countdown"></div>
+  </section>
+
+  <section>
+    <h2>Locația</h2>
+    <p><strong>Green Village</strong><br>Cahul</p>
+  </section>
+
+  <section class="gallery">
+    <h2>Momente</h2>
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
+  </section>
+
+  <section>
+    <h2>Confirmare</h2>
+    <button onclick="alert('RSVP – test')">Confirmă prezența</button>
+  </section>
+
+  <footer>
+    Cu drag, [Numele voastre]
+  </footer>
+
+</div>
+
+<script>
+/* ENVELOPE OPEN */
+const envelope = document.getElementById("envelope");
+const screen = document.getElementById("envelope-screen");
+const invitation = document.getElementById("invitation");
+
+envelope.addEventListener("click", () => {
+  envelope.classList.add("open");
+  setTimeout(() => {
+    screen.style.display = "none";
+    invitation.style.display = "block";
+    window.scrollTo(0, 0);
+  }, 1300);
+});
+
+/* COUNTDOWN */
+const weddingDate = new Date("2026-09-20T00:00:00").getTime();
+const cd = document.getElementById("countdown");
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+
+  const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const m = Math.floor((diff / (1000 * 60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+
+  cd.innerHTML = `
+    <div><strong>${d}</strong><br>zile</div>
+    <div><strong>${h}</strong><br>ore</div>
+    <div><strong>${m}</strong><br>min</div>
+    <div><strong>${s}</strong><br>sec</div>
+  `;
+}, 1000);
+</script>
+
+</body>
+</html>
